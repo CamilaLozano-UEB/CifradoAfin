@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Cifrado Afín</title>
+</head>
+<body>
+<div class="container">
+    <h1>Cifrado Afín</h1>
+    <div class="tabs">
+        <button class="tab-btn" onclick="openTab('cifrar')">Cifrar</button>
+        <button class="tab-btn" onclick="openTab('descifrar')">Descifrar</button>
+    </div>
+    <div class="tab-content" id="cifrar">
+        <textarea id="cifrar-input" placeholder="Ingrese el texto a cifrar"></textarea>
+        <input type="number" id="numero-a" placeholder="Ingrese el número 'a'">
+        <input type="number" id="numero-b" placeholder="Ingrese el número 'b'">
+        <button onclick="cifrarTexto()">Cifrar</button>
+
+        <div id="cifrar-output" class="output"></div>
+    </div>
+    <div class="tab-content" id="descifrar">
+        <textarea id="descifrar-input" placeholder="Ingrese el texto a descifrar"></textarea>
+        <button onclick="descifrarTexto()">Descifrar</button>
+        <div id="descifrar-output" class="output"></div>
+    </div>
+    <div class="output-container" id="output-container">
+        <div id="cifrado-output" class="output"></div>
+    </div>
+    <div class="chart-container" id="chart-container">
+        <canvas id="letter-chart"></canvas>
+    </div>
+
+</div>
+<script src="{{ url_for('static', filename='CharFrequencies.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
