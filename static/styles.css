@@ -113,3 +113,55 @@ textarea, input:focus{
     height: 300px;
     width: 300px;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+
+.blue-box {
+    background-color: #3498db;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+
+.blue-box h2 {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.blue-box label, .blue-box input {
+    display: block;
+    margin: 10px 0;
+}
+
+.blue-box button {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Hide the register form initially */
+#register-form-container {
+    display: none;
+}
+
+/* Button style for switching between login and registration forms */
+#register-button, #login-button {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+

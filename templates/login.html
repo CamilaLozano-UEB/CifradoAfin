@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='LoginJs.js') }}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Cifrado Afín - Inicio de Sesión y Registro</title>
+</head>
+<body>
+<div class="container">
+    <h1>Cifrado Afín - Inicio de Sesión</h1>
+
+    <div class="form-container">
+        <div class="blue-box" id="blue-box">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form" action="/login" method="post">
+                <label for="login-username">Usuario:</label>
+                <input type="text" id="login-username" name="username" placeholder="Ingrese su usuario" required>
+
+                <label for="login-password">Contraseña:</label>
+                <input type="password" id="login-password" name="password" placeholder="Ingrese su contraseña" required>
+
+                <button id="login-button">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

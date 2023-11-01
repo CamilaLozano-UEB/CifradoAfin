@@ -15,7 +15,6 @@ def remove_accents(text):
 
     return cleaned_text
 
-
 def clean_text(text):
     text = re.sub(r'[^a-zA-ZñÑ\s]', '', text)
     return re.sub(r'\s+', ' ', text)

@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='CharFrequencies.js') }}"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>Cifrado Afín</title>
 </head>
 <body>
 <div class="container">
     <h1>Cifrado Afín</h1>
-    <div class="tabs">
+    <div class="tabs" id="inicio">
         <button class="tab-btn" onclick="openTab('cifrar')">Cifrar</button>
         <button class="tab-btn" onclick="openTab('descifrar')">Descifrar</button>
     </div>
@@ -35,7 +36,6 @@
     </div>
 
 </div>
-<script src="{{ url_for('static', filename='CharFrequencies.js') }}"></script>
-<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>
