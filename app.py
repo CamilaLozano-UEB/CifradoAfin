@@ -81,10 +81,11 @@ def get_letter_frequencies():
     return jsonify(top_letters)
 
 
+
 @app.errorhandler(429)
 def ratelimit_error(e):
     return "Demasiados intentos. Por favor, espere un momento antes de intentar nuevamente.", 429
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=8080)
