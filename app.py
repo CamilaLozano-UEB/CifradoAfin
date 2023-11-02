@@ -1,60 +1,49 @@
 import cifrado_afin
-from flask import Flask, render_template, request, jsonify
-from flask_limiter import Limiter
+from flask import Flask, render_template, request, jsonify, session
 from Database import Database
 
 app = Flask(__name__)
-app.secret_key = 'DwUi<£_Ma}["JqaE6Vpu676RQ57w:FD?'  # Cambia esto por una clave segura
+app.secret_key = 'DwUi<£_Ma}["JqaE6Vpu676RQ57w:FD?'  # clave segura
+app.config['PERMANENT_SESSION_LIFETIME'] = 60  # Tiempo
 
-limiter = Limiter(
-    app,
-    storage_uri="mysql://root@localhost:3306/seguridaddb"
-)
+
+def init_session():
+    session['login_attempts'] = 0
+    session['block_time'] = 0
 
 
 @app.route('/')
 def index():
+    session['login_attempts'] = 0
+    session['block_time'] = 0
     return render_template('login.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
-@limiter.limit("3 per minute")  # Establece el límite de 3 intentos por minuto
 def login():
-    data = request.get_json()
-    if request.headers.get('Content-Type') == 'application/json':
-        # Esta parte maneja las solicitudes JSON
+    if request.method == 'POST':
+        if session['block_time'] > 0:
+            return jsonify('Usuario bloqueado, vuelva a intentarlo en {} segundos'.format(session['block_time']))
+
+        data = request.get_json()
         username = data.get("username")
         password = data.get("password")
-    else:
-        # Si no es JSON, se asume que es un formulario
-        username = data.get("username")
-        password = data.get("password")
-    # Conecta con la base de datos
-    cursor = Database().db.cursor()
 
-    # Realiza una consulta para buscar el usuario en la tabla login
-    cursor.execute("SELECT * FROM login WHERE usuario = %s", (username,))
-    result = cursor.fetchone()
+        cursor = Database().db.cursor()
 
-    # Cierra el cursor
-    cursor.close()
+        # Realiza una consulta para buscar el usuario en la tabla login
+        cursor.execute("SELECT * FROM login WHERE usuario = %s", (username,))
+        result = cursor.fetchone()
+        # Cierra el cursor
+        cursor.close()
 
-    if result:
         # Obtiene la contraseña cifrada almacenada en la base de datos
         stored_password = result[1]
-
         # Compara la contraseña cifrada del usuario con la almacenada en la base de datos
         if password == stored_password:
             return jsonify({"success": True})
         else:
-            if request.headers.get('Content-Type') == 'application/json':
-                return jsonify({"success": False})
-            else:
-                return jsonify({"success": False, "message": "Nombre de usuario o contraseña incorrectos"})
-    else:
-        if request.headers.get('Content-Type') == 'application/json':
-            return jsonify({"success": False})
-        else:
+            session['login_attempts'] += 1
             return jsonify({"success": False, "message": "Nombre de usuario o contraseña incorrectos"})
 
 
