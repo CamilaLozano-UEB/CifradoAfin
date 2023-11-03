@@ -6,7 +6,6 @@ from flask import Flask, render_template, request, jsonify
 from Database import Database
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'DwUi<£_Ma}["JqaE6Vpu676RQ57w:FD?'
 logging.basicConfig(filename='./logs/login_attempts.log', level=logging.INFO)
 
 
