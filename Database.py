@@ -11,7 +11,7 @@ class Database:
             cls._instance.db = mysql.connector.connect(
                 host='localhost',
                 user='root',
-                password='EnanosAlbinos',
+                password='Escorpion25151.',
                 database='seguridaddb'
             )
         return cls._instance
