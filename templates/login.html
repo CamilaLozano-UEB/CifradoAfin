@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='LoginJs.js') }}"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <title>Cifrado Afín - Inicio de Sesión y Registro</title>
 </head>
 <body>
@@ -22,10 +24,19 @@
                 <label for="login-password">Contraseña:</label>
                 <input type="password" id="login-password" name="password" placeholder="Ingrese su contraseña" required>
 
-                <button id="login-button">Iniciar Sesión</button>
+                <div class="g-recaptcha" data-sitekey="6Lduku4oAAAAAB-i-qnZG7OGmTVVzXUV-8uhBmo2" data-callback="enableLoginButton"></div>
+                <br>
+
+                <button id="login-button" disabled>Iniciar Sesión</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function enableLoginButton() {
+        document.getElementById('login-button').removeAttribute('disabled');
+    }
+</script>
+
 </body>
 </html>

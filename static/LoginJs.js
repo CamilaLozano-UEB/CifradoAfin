@@ -8,6 +8,7 @@ function sha256(str) {
         const array = Array.from(new Uint8Array(buffer));
         return array.map(byte => byte.toString(16).padStart(2, "0")).join("");
     });
+
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var username = document.getElementById("login-username").value;
         var password = document.getElementById("login-password").value;
+         ip =
 
         // Cifra la contraseña con SHA-256 antes de enviarla
         sha256(password).then(function (cipheredPassword) {

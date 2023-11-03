@@ -1,30 +1,23 @@
 import cifrado_afin
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify
+import logging
+from flask import Flask, render_template, request, jsonify
+
 from Database import Database
 
 app = Flask(__name__)
-app.secret_key = 'DwUi<£_Ma}["JqaE6Vpu676RQ57w:FD?'  # clave segura
-app.config['PERMANENT_SESSION_LIFETIME'] = 60  # Tiempo
-
-
-def init_session():
-    session['login_attempts'] = 0
-    session['block_time'] = 0
+app.config['SECRET_KEY'] = 'DwUi<£_Ma}["JqaE6Vpu676RQ57w:FD?'
+logging.basicConfig(filename='./logs/login_attempts.log', level=logging.INFO)
 
 
 @app.route('/')
 def index():
-    session['login_attempts'] = 0
-    session['block_time'] = 0
     return render_template('login.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        if session['block_time'] > 0:
-            return jsonify('Usuario bloqueado, vuelva a intentarlo en {} segundos'.format(session['block_time']))
-
         data = request.get_json()
         username = data.get("username")
         password = data.get("password")
@@ -43,7 +36,7 @@ def login():
         if password == stored_password:
             return jsonify({"success": True})
         else:
-            session['login_attempts'] += 1
+            logging.info(f"Intento de inicio de sesión fallido desde IP: {request.remote_addr}")
             return jsonify({"success": False, "message": "Nombre de usuario o contraseña incorrectos"})
 
 
@@ -79,7 +72,6 @@ def get_letter_frequencies():
     text = request.args.get('text')  # Obtén el texto para calcular las frecuencias
     top_letters = cifrado_afin.returnChart(text)
     return jsonify(top_letters)
-
 
 
 @app.errorhandler(429)
