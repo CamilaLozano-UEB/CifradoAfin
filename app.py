@@ -1,5 +1,4 @@
 import cifrado_afin
-from flask import Flask, render_template, request, jsonify
 import logging
 from flask import Flask, render_template, request, jsonify
 
