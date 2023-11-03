@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 password: cipheredPassword
 
             };
-            console.log(cipheredPassword)
 
             // Realiza una solicitud AJAX para enviar los datos de inicio de sesión al servidor en formato JSON
             var xhr = new XMLHttpRequest();
