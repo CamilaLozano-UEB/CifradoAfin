@@ -1,8 +1,8 @@
 import cifrado_afin
 import logging
+from Database import Database
 from flask import Flask, render_template, request, jsonify
 
-from Database import Database
 
 app = Flask(__name__)
 logging.basicConfig(filename='./logs/login_attempts.log', level=logging.INFO)
