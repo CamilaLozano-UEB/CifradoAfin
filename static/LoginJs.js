@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var username = document.getElementById("login-username").value;
         var password = document.getElementById("login-password").value;
-         ip =
 
         // Cifra la contraseña con SHA-256 antes de enviarla
         sha256(password).then(function (cipheredPassword) {
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
             xhr.onreadystatechange = function () {
 
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log(xhr.responseText)
                     var response = JSON.parse(xhr.responseText);
                     if (response.blocked) {
                         alert(response.blocked)

@@ -1,3 +1,4 @@
+from datetime import datetime
 import cifrado_afin
 import logging
 from Database import Database
@@ -34,7 +35,8 @@ def login():
         if password == stored_password:
             return jsonify({"success": True})
         else:
-            logging.info(f"Intento de inicio de sesión fallido desde IP: {request.remote_addr}")
+            log_message = f"Intento de inicio de sesión fallido - Usuario: {username}, Hora: {datetime.now()}"
+            logging.error(log_message)
             return jsonify({"success": False, "message": "Nombre de usuario o contraseña incorrectos"})
 
 
